@@ -24,7 +24,7 @@ Route::get('/tributos/telasenha/{instituicao}',  [homecontroller::class, 'pagina
 //listar usuarios
 Route::post('/tributos/principal/{instituicao}',   [usuarioController::class, "logarSistema"])->name('logar');
 Route::get('/tributos/principal/usuario/{id?}',           [usuarioController::class, 'index'])->name('usuario.index_usuario');
-Route::get('/tributos/principal/usuario_lista',           [usuarioController::class, 'lista'])->name('usuario.index_usuario');
+Route::get('/tributos/principal/usuario_lista',           [usuarioController::class, 'lista'])->name('usuario.index_usuario_lista');
 
 //Route::view('/usuario/index_usuario', 'usuario.index_usuario');
  //rotas de usuarios

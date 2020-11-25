@@ -24,12 +24,6 @@ class usuario extends Model
          return view('usuario/index')->with('itens', $users);
       }
    }
-   // public function lista()
-   // {
-   //    $usuario = Usuario::orderby('id', 'desc')->paginate();
-   //    return view('usuario/index')->with('itens', $usuario);
-   // }
-
    public function instituicao()
    {
       return $this->hasOne(instituicao::class,  'id', 'idinstituicao');

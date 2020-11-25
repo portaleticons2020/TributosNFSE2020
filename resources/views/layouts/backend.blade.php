@@ -1,5 +1,27 @@
-<!doctype html>
 
+
+<?php
+@session_start();
+use App\Models\usuario;
+$id_instituicao = @$_SESSION['inst_id'];
+$nome_instituicao = @$_SESSION['inst_nome'];
+$id_usuario = $_SESSION['id_usuario'];
+$nome_usuario = $_SESSION['nome_usuario'];
+$nivel_usuario = $_SESSION['nivel_usuario'];
+$nivel_usuario_desc = $_SESSION['nivel_usuario_desc'];
+
+
+$filename = __DIR__.'media/avatars/{{$foto}}.jpg';
+
+if (file_exists($filename)) {
+    $foto = $id_usuario;
+} else {
+    $foto = 'padrao';
+}
+?>
+
+
+<!doctype html>
 
 <html lang="{{ config('app.locale') }}">
 
@@ -7,7 +29,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>E-ticons-Tributos</title>
+    <title>E-ticons-Tributos {{$filename}}</title>
 
     <meta name="description" content="Sistema de Tributos">
     <meta name="author" content="pixelcave">
@@ -23,11 +45,13 @@
 
     <!-- Fonts and Styles -->
     @yield('css_before')
+
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
 
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
+    <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/flat.css') }}">
     @yield('css_after')
 
     <!-- Scripts -->
@@ -35,7 +59,6 @@
 </head>
 
 <body>
-
     <!-- Page Container -->
     <!--
             Available classes for #page-container:
@@ -81,15 +104,15 @@
             <!-- Side Header -->
             <div class="content-header border-bottom">
                 <!-- User Avatar -->
-                
+
                 <a class="img-link mr-1" href="javascript:void(0)">
-                    <img class="img-avatar img-avatar32" src="{{ asset('media/avatars/avatar10.jpg') }}" alt="">
+                    <img class="img-avatar img-avatar32" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg" alt="">
                 </a>
                 <!-- END User Avatar -->
 
                 <!-- User Info -->
                 <div class="ml-2">
-                    <a class="link-fx text-dark font-w600" href="javascript:void(0)">Adam McCoy</a>
+                    <a class="link-fx text-dark font-w600" href="javascript:void(0)"></a>
                 </div>
                 <!-- END User Info -->
 
@@ -126,7 +149,7 @@
             -->
         <nav id="sidebar" aria-label="Main Navigation">
             <!-- Side Header -->
-            <div class="content-header bg-white-5">
+            <div class="content-header-logo bg-white-5">
                 <img width="200" height="50" src="{{ asset('img/logo.png') }}" alt="">
             </div>
             <!-- END Side Header -->
@@ -142,12 +165,13 @@
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
-                                <a class="nav-main-link{{ request()->is('usuario.index_usuario') ? ' active' : '' }}" href="{{route('usuario.index_usuario')}}">
+                                <a class="nav-main-link{{ request()->is('usuario.index_usuario') ? ' active' : '' }}" href="{{route('usuario.index_usuario_lista')}}">
                                     <span class="nav-main-link-name">Usuários</span>
                                 </a>
                             </li>
                             <li class="nav-main-item">
                                 <a class="nav-main-link{{ request()->is('pages/teste') ? ' active' : '' }}" href="/pages/teste">
+
                                     <span class="nav-main-link-name">Instituição teste</span>
                                 </a>
                             </li>
@@ -176,8 +200,8 @@
             <!-- Header Content -->
             <div class="content-header">
                 <!-- Left Section -->
-                <div class="d-flex align-items-center">
-                    <h3 class="content">NOME DA EMPRESA</h3>
+                <div>
+                    <h3 class="content">{{$nome_instituicao}}</h3>
                 </div>
                 <!-- END Left Section -->
 
@@ -186,42 +210,22 @@
                     <!-- User Dropdown -->
                     <div class="dropdown d-inline-block ml-2">
                         <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded" src="{{ asset('media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
-                            <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                            <img class="rounded" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg" alt="Header Avatar" style="width: 18px;">
+                            <span class="d-none d-sm-inline-block ml-1">{{$nome_usuario}} ({{$nivel_usuario_desc}}) </span>
                             <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
                             <div class="p-3 text-center bg-primary">
-                                <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('media/avatars/avatar10.jpg') }}" alt="">
+                                <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg"  alt="">
                             </div>
                             <div class="p-2">
-                                <h5 class="dropdown-header text-uppercase">User Options</h5>
+                                <h5 class="dropdown-header text-uppercase">Sessão do Usuário</h5>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                    <span>Inbox</span>
-                                    <span>
-                                        <span class="badge badge-pill badge-primary">3</span>
-                                        <i class="si si-envelope-open ml-1"></i>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                    <span>Profile</span>
-                                    <span>
-                                        <span class="badge badge-pill badge-success">1</span>
-                                        <i class="si si-user ml-1"></i>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                    <span>Settings</span>
-                                    <i class="si si-settings"></i>
-                                </a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                <h5 class="dropdown-header text-uppercase">Actions</h5>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                    <span>Lock Account</span>
+                                    <span>Trocar Senha</span>
                                     <i class="si si-lock ml-1"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                    <span>Log Out</span>
+                                    <span>Sair</span>
                                     <i class="si si-logout ml-1"></i>
                                 </a>
                             </div>
@@ -311,7 +315,7 @@
                             </div>
                         </div>
                     </div>
-   
+
                 </div>
                 <!-- END Right Section -->
             </div>
