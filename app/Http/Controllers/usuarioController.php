@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 
 class usuarioController extends Controller
 {
-    public function create()
-    {
-        return view('Principal.index');
-    }
-
     public function logarSistema(request $request, instituicao $instituicao)
     {
 
@@ -82,9 +77,34 @@ class usuarioController extends Controller
 
     public function lista()
     {
-        $usuario = usuario::all();
+        @session_start();
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         $instituicao = instituicao::all();
 
-        return view('usuario.index_usuario', ['vUsuarios' => $usuario, 'instituicao' => $instituicao]);
+        return view('usuario.index_usuario')->with('vUsuarios', $usuario);
+    }
+
+    public function edit(usuario $id)
+    {
+        return view('usuario.edit_usuario', ['item' => $id]);
+    }
+    public function create()
+    {
+        return view('usuario.create_usuario');
+    }
+    public function insert(Request $request)
+    {
+        $tabela = new usuario();
+        $tabela->nome = $request->nome;
+
+        //validação para não duplicar
+        $itens = usuario::where('nome', '=', $request->nome)->count();
+        if ($itens > 0) {
+            echo "<script language='javascript'> window.alert('Registro já Cadastrado!') </script>";
+            return view('usuario.create_usuario');
+        }
+
+        $tabela->save();
+        return redirect()->route('usuario.index_usuario');
     }
 }

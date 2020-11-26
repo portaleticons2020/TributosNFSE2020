@@ -22,12 +22,15 @@ Route::get('/tributos/telasenha/{instituicao}',  [homecontroller::class, 'pagina
 
 
 //listar usuarios
-Route::post('/tributos/principal/{instituicao}',   [usuarioController::class, "logarSistema"])->name('logar');
-Route::get('/tributos/principal/usuario/{id?}',           [usuarioController::class, 'index'])->name('usuario.index_usuario');
-Route::get('/tributos/principal/usuario_lista',           [usuarioController::class, 'lista'])->name('usuario.index_usuario_lista');
+Route::post('/tributos/principal/{instituicao}',     [usuarioController::class, "logarSistema"])->name('logar');
+Route::get('/tributos/principal/usuario/{id?}',      [usuarioController::class, 'index'])->name('usuario.index_usuario');
+Route::get('/tributos/principal/usuario_lista',      [usuarioController::class, 'lista'])->name('usuario.index_usuario_lista');
+Route::get('/tributos/principal/usuario/{id?}/edit', [usuarioController::class, 'edit'])->name('usuario.edit_usuario');
+Route::post('/tributos/principal/usuario_novo',      [usuarioController::class, 'insert'])->name('usuario.insert');
+Route::get('tributos/principal/usuario_novo',        [usuarioController::class, 'create'])->name('instrutores.inserir');
 
 //Route::view('/usuario/index_usuario', 'usuario.index_usuario');
- //rotas de usuarios
+//rotas de usuarios
 // Route::post('/usuario/{instituicao}',    [usuarioController::class, "logarSistema"])->name('logar');
 //rotas de controle da tela do menu incial
 // Route::get('/instituicao/{id?}',       [instituicaoController::class, 'index']);
@@ -37,6 +40,6 @@ Route::get('/tributos/principal/usuario_lista',           [usuarioController::cl
 // Route::match(['get', 'post'], '/dashboard', function(){
 //     return view('dashboard');
 // });
- Route::view('/pages/slick', 'pages.slick');
- Route::view('/pages/datatables', 'pages.datatables');
- Route::view('/pages/blank', 'pages.blank');
+Route::view('/pages/slick', 'pages.slick');
+Route::view('/pages/datatables', 'pages.datatables');
+Route::view('/pages/blank', 'pages.blank');

@@ -30,15 +30,27 @@
 
 @section('content')
 
-<div class="content content-full">
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <h3>Cadastro de Usuários</h3>
-    </div>
-    <div class="col-sm-6 text-right h1">
-        <a class="btn btn-primary" href=""><i class="fa fa-plus"></i> Inserir Novo</a>
-        <a class="btn btn-danger text-white" href=""><i class="fa fa-times"></i> Fechar</a>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dtTabela').dataTable({
+            "language": {
+                "url": "dataTables.german.lang"
+            }
+        });
+    });
+</script>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Cadastro de Usuários</h2>
+        </div>
+        <div class="col-sm-6 text-right h1">
+            <a class="btn btn-primary"  href="{{route('usuario.insert')}}"><i class="fa fa-plus"></i> Inserir Novo</a>
+            <button type="button" class="btn btn-danger js-click-ripple-enabled" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1;"><span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
+                <i class="fa fa-fw fa-plus mr-1"></i fa-times> Fechar </button>
+        </div>
     </div>
 </div>
 
@@ -78,15 +90,14 @@
                         </td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit Client">
-                                    <i class="fa fa-fw fa-pencil-alt"></i>
+                                <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client">
+                                    <a href="{{route('usuario.edit_usuario',$item)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
                                 </button>
                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Remove Client">
                                     <i class="fa fa-fw fa-times"></i>
                                 </button>
                             </div>
                         </td>
-
                     </tr>
                     @endforeach
 
@@ -97,28 +108,7 @@
     <!-- </div> -->
 
 
-</body>
-
-</html>
-</div>
-</div>
-</div>
-
-<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"></script>
-
-<script type="text/javascript" src="{{asset('js/plugins/datatables/jquery.dataTables.js')}}"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dtTabela').dataTable({
-            "language": {
-                "url": "dataTables.german.lang"
-            }
-        });
-    });
-</script>
-
-@endsection
+    @endsection
 </body>
 
 </html>
