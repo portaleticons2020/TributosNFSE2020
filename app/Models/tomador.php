@@ -28,7 +28,7 @@ class tomador extends Model
       public $timestamp = false;    
       
       public function instituicao(){
-        return $this->hasOne(instituicao::class,  'id', 'idinstituicao');
+        return $this->belongsTo(instituicao::class,  'id', 'idinstituicao');
       }
       public function atividades_tomadores(){
         return $this->belongsToMany(atividade_tomadores::class,  'idtomador', 'idAtividade');

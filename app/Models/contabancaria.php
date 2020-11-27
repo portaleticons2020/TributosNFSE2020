@@ -23,7 +23,7 @@ class contabancaria extends Model
    
    
    public function instituicao(){
-       return $this->belongsTo(instituicao::class , 'id','idinstituicao');
+    return $this->belongsTo(instituicao::class, 'idinstituicao','id');
    }
 
 //    public function financeiro(){

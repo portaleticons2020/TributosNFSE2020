@@ -24,9 +24,12 @@ class usuarioController extends Controller
         $senha = $request->senha;
         $idinstituicao = $instituicao->id;
 
+      
+
         $usuario = usuario::where('login', $login)->where('senha', $senha)->where('idinstituicao', $idinstituicao)->first();
         if ($usuario) {
             $empresa = $usuario->instituicao()->first();
+           
             if ($empresa) {
 
                 @session_start();
