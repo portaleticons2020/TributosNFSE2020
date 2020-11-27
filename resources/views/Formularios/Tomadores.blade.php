@@ -5,7 +5,7 @@
 <html lang="pt-br">
 @section('css_before')
 <!-- Page JS Plugins CSS -->
-<link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
+<link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
@@ -34,7 +34,7 @@
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <h3>Cadastro de Usuários</h3>
+        <h3>Cadastro de Tomadores</h3>
     </div>
     <div class="col-sm-6 text-right h1">
         <a class="btn btn-primary" href=""><i class="fa fa-plus"></i> Inserir Novo</a>
@@ -50,28 +50,26 @@
             <table id="dtTabela" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
                 <thead class="thead-dark">
                     <tr>
-                        <th class="text-center">Cód.</th>
-                        <th style="width: 50%;">Nome</th>
-                        <th>Email</th>
-                        <th>Nível</th>
-                        <th>Ação</th>
+                        <th class="text-center">Documento</th>
+                        <th style="width: 50%;">nome</th>
+                        <th>Fone</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($usuarios as $usuario)
+                    @foreach($vUsuarios as $item)
                     <tr>
-                        <td class="text-center">{{$usuario->id}}</td>
+                        <td class="text-center">{{$item->id}}</td>
                         <td class="font-w600">
-                            <a href="javascript:void(0)">{{$usuario->nome}}</a>
+                            <a href="javascript:void(0)">{{$item->nome}}</a>
                         </td>
                         <td class="d-none d-sm-table-cell font-size-sm">
-                            <em class="text-muted">{{$usuario->email}}</em>
+                            <em class="text-muted">{{$item->email}}</em>
                         </td>
                         <td class="text-center">
                             <?php
-                            if ($usuario->nivel == '1') {
+                            if ($item->nivel == '1') {
                                 echo '<span class="badge badge-info">Adminstrador</span>';
-                            } else if ($usuario->nivel == '2') {
+                            } else if ($item->nivel == '2') {
                                 echo '<span class="badge badge-success">Usuário</span>';
                             }
                             ?>

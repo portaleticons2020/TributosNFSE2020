@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class contabancaria extends Model
 {
     protected $table='contabancarias';
-    protected $fillable=['codigobanco',
+    protected $fillable=['id',
+                         'codigobanco',
                          'agencia',
                          'digitoagencia',
                          'conta',
@@ -22,10 +23,10 @@ class contabancaria extends Model
    
    
    public function instituicao(){
-       return $this->hasOne(instituicao::class , 'id','idinstituicao');
+       return $this->belongsTo(instituicao::class , 'id','idinstituicao');
    }
 
-   public function financeiro(){
-        return $this->morphToMany(financeiro::class, 'contabancaria','idconta');
-   }
+//    public function financeiro(){
+//         return $this->morphToMany(financeiro::class, 'contabancaria','idconta');
+//    }
 }

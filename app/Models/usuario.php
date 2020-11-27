@@ -13,20 +13,11 @@ class usuario extends Model
    
    public $timestamp = false;
    
-   public function index($id)
-   {
-      $users = usuario::where('id', $id)->first();
-
-      if ($users) {
-         $_SESSION['inst_id']       = $users->id;
-         $_SESSION['inst_nome']     = $users->nome;
-
-         return view('usuario/index')->with('itens', $users);
-      }
-   }
+  
    public function instituicao()
    {
-      return $this->hasOne(instituicao::class,  'id', 'idinstituicao');
+      return $this->belongsTo(instituicao::class, 'id', 'idinstituicao',);
+     
       
    }
 }

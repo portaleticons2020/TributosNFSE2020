@@ -14,18 +14,17 @@ class Usuarios extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('login')->unique();
-            $table->string('cpf')->unique();
-            $table->string('nome');
-            $table->string('email')->unique();
-            $table->string('senha');
-            $table->integer('idinstituicao');
+            $table->Bigincrements('id')->unique();
+            $table->string('login',10);
+            $table->string('cpf',14);
+            $table->string('nome',50);
+            $table->string('email',60);
+            $table->string('senha',10);
+            $table->unsignedBigInteger('idinstituicao')->unsigned();
             $table->integer('nivel');
             $table->integer('bloqueado');
-            $table->rememberToken();
-            $table->timestamps();});
-
+            $table->timestamps();
+            $table->foreign('idinstituicao')->references('id')->on('instituicoes');});
             //trabalhando relacionamento
             
 
