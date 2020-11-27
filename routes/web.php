@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('tributos/{id?}',        [instituicaoController::class, 'index']);
+Route::get('tributos/{id?}',                     [instituicaoController::class, 'index']);
 Route::get('/tributos/telasenha/{instituicao}',  [homecontroller::class, 'paginalogon'])->name('telasenha');
 
 

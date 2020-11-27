@@ -85,6 +85,8 @@ class usuarioController extends Controller
         $usuario = usuario::all();
         $instituicao = instituicao::all();
 
+        
+
         return view('usuario.index_usuario', ['vUsuarios' => $usuario, 'instituicao' => $instituicao]);
     }
 }
