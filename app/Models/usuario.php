@@ -11,8 +11,8 @@ class usuario extends Model
    protected $fillable = ['nome', 'cpf', 'email', 'login', 'senha', 'nivel,', 'idinstituicao'];
    protected $hidden   = ['senha'];
    
-   public $timestamp = false;
-   
+   public $timestamps = false;
+      
    public function index($id)
    {
       $users = usuario::where('id', $id)->first();
@@ -21,9 +21,10 @@ class usuario extends Model
          $_SESSION['inst_id']       = $users->id;
          $_SESSION['inst_nome']     = $users->nome;
 
-         return view('usuario/index')->with('itens', $users);
+         return view('usuario/index_usuario')->with('itens', $users);
       }
    }
+   
    public function instituicao()
    {
       return $this->hasOne(instituicao::class,  'id', 'idinstituicao');

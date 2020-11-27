@@ -30,24 +30,13 @@
 
 @section('content')
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dtTabela').dataTable({
-            "language": {
-                "url": "dataTables.german.lang"
-            }
-        });
-    });
-</script>
-
-
 <div class="content">
     <div class="row">
         <div class="col-sm-6">
             <h2>Cadastro de Usuários</h2>
         </div>
         <div class="col-sm-6 text-right h1">
-            <a class="btn btn-primary"  href="{{route('usuario.insert')}}"><i class="fa fa-plus"></i> Inserir Novo</a>
+            <a class="btn btn-primary" href="{{route('usuario.inserir')}}"><i class="fa fa-plus"></i> Inserir Novo</a>
             <button type="button" class="btn btn-danger js-click-ripple-enabled" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1;"><span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
                 <i class="fa fa-fw fa-plus mr-1"></i fa-times> Fechar </button>
         </div>
@@ -106,6 +95,8 @@
         </div>
     </div>
     <!-- </div> -->
+
+
 
 
     @endsection

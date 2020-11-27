@@ -11,10 +11,9 @@
     </div>
 </div>
 <!-- </div> -->
-
 <div class="content" style="color:black;">
     <form method="POST" action="{{route('usuario.insert')}}">
-        @csrf
+        @csrf                  
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -83,7 +82,7 @@
 
 
         <p align="right">
-            <input type="button" ... value="Cancelar" class="btn btn-danger" onclick="history.back();" />
+            <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
             <button type="submit" class="btn btn-primary">Salvar</button>
         </p>
 

@@ -43,12 +43,24 @@ if (!(file_exists($filename))) {
     <!-- Fonts and Styles -->
     @yield('css_before')
 
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
 
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
     <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/flat.css') }}">
+
+    
+    <script src="{{ URL::asset('js/plugins/jquery-validation/jquery.validate.js') }}"></script>
+    <script src="{{ URL::asset('js/core/jquery.min.js') }}"></script>
+
+
+
+    <link rel="stylesheet" href="{{ URL::asset('js/plugins/datatables/dataTables.bootstrap4.css')}}">
+    <script src="{{ URL::asset('/js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ URL::asset('/js/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+
+
     @yield('css_after')
 
     <!-- Scripts -->
@@ -382,7 +394,8 @@ if (!(file_exists($filename))) {
     <!-- OneUI Core JS -->
     <script src="{{ mix('js/oneui.app.js') }}"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
-    
+
+        
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
