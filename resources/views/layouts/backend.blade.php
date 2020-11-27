@@ -1,8 +1,8 @@
-
-
 <?php
 @session_start();
+
 use App\Models\usuario;
+
 $id_instituicao = @$_SESSION['inst_id'];
 $nome_instituicao = @$_SESSION['inst_nome'];
 $id_usuario = $_SESSION['id_usuario'];
@@ -10,16 +10,13 @@ $nome_usuario = $_SESSION['nome_usuario'];
 $nivel_usuario = $_SESSION['nivel_usuario'];
 $nivel_usuario_desc = $_SESSION['nivel_usuario_desc'];
 
-
-$filename = __DIR__.'media/avatars/{{$foto}}.jpg';
-
-if (file_exists($filename)) {
-    $foto = $id_usuario;
+$filename =  asset('media/avatars/') . "/" . $id_usuario . ".jpg";
+if (!(file_exists($filename))) {
+    $foto = $filename;
 } else {
-    $foto = 'padrao';
+    $foto = asset('media/avatars/') . "/" . 'padrao.jpg';
 }
 ?>
-
 
 <!doctype html>
 
@@ -29,7 +26,7 @@ if (file_exists($filename)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>E-ticons-Tributos {{$filename}}</title>
+    <title>E-ticons-Tributos</title>
 
     <meta name="description" content="Sistema de Tributos">
     <meta name="author" content="pixelcave">
@@ -98,7 +95,7 @@ if (file_exists($filename)) {
             'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
-    <div id="page-container" class="sidebar-o enable-page-overlay sidebar-light side-scroll page-header-fixed">
+    <div id="page-container" role="dialog" class="sidebar-o enable-page-overlay sidebar-light side-scroll page-header-fixed">
         <!-- Side Overlay-->
         <aside id="side-overlay" class="font-size-sm">
             <!-- Side Header -->
@@ -106,7 +103,7 @@ if (file_exists($filename)) {
                 <!-- User Avatar -->
 
                 <a class="img-link mr-1" href="javascript:void(0)">
-                    <img class="img-avatar img-avatar32" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg" alt="">
+                    <img class="img-avatar img-avatar32" src="{{$foto}}" alt="">
                 </a>
                 <!-- END User Avatar -->
 
@@ -172,7 +169,7 @@ if (file_exists($filename)) {
                             <li class="nav-main-item">
                                 <a class="nav-main-link{{ request()->is('pages/teste') ? ' active' : '' }}" href="/pages/teste">
 
-                                    <span class="nav-main-link-name">Instituição teste</span>
+                                    <span class="nav-main-link-name">Instituição</span>
                                 </a>
                             </li>
                             <li class="nav-main-item">
@@ -201,7 +198,7 @@ if (file_exists($filename)) {
             <div class="content-header">
                 <!-- Left Section -->
                 <div>
-                    <h3 class="content">{{$nome_instituicao}}</h3>
+                    <h3 class="content"> {{$nome_instituicao}} </h3>
                 </div>
                 <!-- END Left Section -->
 
@@ -210,13 +207,13 @@ if (file_exists($filename)) {
                     <!-- User Dropdown -->
                     <div class="dropdown d-inline-block ml-2">
                         <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg" alt="Header Avatar" style="width: 18px;">
+                            <img class="rounded" src="{{$foto}}" alt="Header Avatar" style="width: 18px;">
                             <span class="d-none d-sm-inline-block ml-1">{{$nome_usuario}} ({{$nivel_usuario_desc}}) </span>
                             <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
                             <div class="p-3 text-center bg-primary">
-                                <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('media/avatars/') }}/{{$foto}}.jpg"  alt="">
+                                <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{$foto}}" alt="">
                             </div>
                             <div class="p-2">
                                 <h5 class="dropdown-header text-uppercase">Sessão do Usuário</h5>
@@ -359,6 +356,8 @@ if (file_exists($filename)) {
         </main>
         <!-- END Main Container -->
 
+        
+
         <!-- Footer -->
         <footer id="page-footer" class="bg-body-light">
             <div class="content py-3">
@@ -375,80 +374,15 @@ if (file_exists($filename)) {
 
         <!-- Apps Modal -->
         <!-- Opens from the modal toggle button in the header -->
-        <div class="modal fade" id="one-modal-apps" tabindex="-1" role="dialog" aria-labelledby="one-modal-apps" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-top modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="block block-themed block-transparent mb-0">
-                        <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Apps</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                                    <i class="si si-close"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content block-content-full">
-                            <div class="row gutters-tiny">
-                                <div class="col-6">
-                                    <!-- CRM -->
-                                    <a class="block block-rounded block-themed bg-default" href="javascript:void(0)">
-                                        <div class="block-content text-center">
-                                            <i class="si si-speedometer fa-2x text-white-75"></i>
-                                            <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                CRM
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <!-- END CRM -->
-                                </div>
-                                <div class="col-6">
-                                    <!-- Products -->
-                                    <a class="block block-rounded block-themed bg-danger" href="javascript:void(0)">
-                                        <div class="block-content text-center">
-                                            <i class="si si-rocket fa-2x text-white-75"></i>
-                                            <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                Products
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <!-- END Products -->
-                                </div>
-                                <div class="col-6">
-                                    <!-- Sales -->
-                                    <a class="block block-rounded block-themed bg-success mb-0" href="javascript:void(0)">
-                                        <div class="block-content text-center">
-                                            <i class="si si-plane fa-2x text-white-75"></i>
-                                            <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                Sales
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <!-- END Sales -->
-                                </div>
-                                <div class="col-6">
-                                    <!-- Payments -->
-                                    <a class="block block-rounded block-themed bg-warning mb-0" href="javascript:void(0)">
-                                        <div class="block-content text-center">
-                                            <i class="si si-wallet fa-2x text-white-75"></i>
-                                            <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                Payments
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <!-- END Payments -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- END Apps Modal -->
     </div>
     <!-- END Page Container -->
 
     <!-- OneUI Core JS -->
     <script src="{{ mix('js/oneui.app.js') }}"></script>
+    <script src="{{ URL::asset('js/mascaras.js') }}"></script>
+    
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
