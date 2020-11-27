@@ -174,7 +174,7 @@ if (!(file_exists($filename))) {
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
-                                <a class="nav-main-link{{ request()->is('usuario.index_usuario') ? ' active' : '' }}" href="{{route('usuario.index_usuario_lista')}}">
+                                <a class="nav-main-link{{ request()->is('usuario.index_usuario') ? ' active' : '' }}" href="{{route('usuario.index_usuario_lista',[$id_instituicao])}}">
                                     <span class="nav-main-link-name">Usuários</span>
                                 </a>
                             </li>

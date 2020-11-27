@@ -14,19 +14,19 @@ class ContaBancarias extends Migration
     public function up()
     {
         Schema::create('contaBancarias', function (Blueprint $table) {
-            $table->integer('idConta');
-            $table->string('codigoBanco');
-            $table->string('agencia');
-            $table->string('digitoAgencia');
-            $table->string('conta');
-            $table->string('digitoConta');
-            $table->string('descricaoConta');
-            $table->string('convenio');
-            $table->string('codigofebraban');
+            $table->Bigincrements('id')->unique;
+            $table->string('codigoBanco',5);
+            $table->string('agencia',10);
+            $table->string('digitoAgencia',2);
+            $table->string('conta',30);
+            $table->string('digitoConta',2);
+            $table->string('descricaoConta',100);
+            $table->string('convenio',20);
+            $table->string('codigofebraban',20);
             $table->integer('ativa');
-            $table->integer('idinstituicao');
+            $table->unsignedBigInteger('idinstituicao')->unsigned();
             $table->timestamps();
-            //relacionamento
+            $table->foreign('idinstituicao')->references('id')->on('instituicoes');
        });
     }
 
@@ -37,6 +37,6 @@ class ContaBancarias extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('contaBancarias');
     }
 }
