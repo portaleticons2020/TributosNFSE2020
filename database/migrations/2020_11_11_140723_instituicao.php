@@ -15,20 +15,23 @@ class Instituicao extends Migration
     {
         
             Schema::create('instituicoes', function (Blueprint $table) {
-                $table->Bigincrements('id')->unique();
-                $table->string('cnpj')->unique();
-                $table->string('instituicao');
-                $table->string('endereco');
-                $table->string('numero');
-                $table->string('bairro');
-                $table->string('cep');
-                $table->string('fone');
-                $table->string('responsavel');
+                $table->Bigincrements('id');
+                $table->string('cnpj',14);
+                $table->string('instituicao',60);
+                $table->string('endereco',100);
+                $table->string('numero',5);
+                $table->string('bairro',30);
+                $table->string('cep',8);
+                $table->string('fone',20);
+                $table->string('responsavel',40);
                 $table->integer('liberada');
                 $table->timestamps();
+                
                
                
-            });  
+          
+            }); 
+
     }
 
  

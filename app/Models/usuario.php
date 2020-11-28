@@ -27,6 +27,6 @@ class usuario extends Model
    
    public function instituicao()
    {
-      return $this->hasOne(instituicao::class,  'id', 'idinstituicao');
+      return $this->BelongsTo(instituicao::class, 'idinstituicao', 'id');
    }
 }

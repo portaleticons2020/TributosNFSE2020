@@ -22,14 +22,14 @@ class Tomadores extends Migration
             $table->string('inscricao_municipal',20);
             $table->string('inscricao_estadual',20);
             $table->integer('Contato');
-            $table->string('idAtividade');
+            $table->integer('idAtividade');
             $table->integer('Regime');
             $table->string('endereco',100);
             $table->string('Numero',6);
             $table->string('cep',8);
             $table->string('cidade',50);
-            $table->string('bairro');
-            $table->string('uf');
+            $table->string('bairro',30);
+            $table->string('uf',2);
             $table->string('observacao');
             $table->integer('idinstituicao');
             $table->integer('ativo')->default(1);

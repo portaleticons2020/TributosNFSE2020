@@ -64,18 +64,21 @@ class usuarioController extends Controller
 
     public function index()
     {
-        $usuario = usuario::orderby('id', 'desc')->paginate();
+        
         $empresa = instituicao::orderby('id', 'desc')->paginate();
-        return view('usuario.index_usuario')->with('instituicao', $empresa)->with('itens', $usuario);
+        return view('usuario.index_usuario')->with('instituicao', $empresa);
     }
 
-    public function lista()
+    public function lista($id)
     {
         @session_start();
-        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
-        // $instituicao = instituicao::all();
-
-        return view('usuario.index_usuario')->with('vUsuarios', $usuario);
+        $empresa = instituicao::where('id',$id)->first();
+        $usuarios = $empresa->usuario()->get(); //Get() retorna a lista dos objets 
+        //  dd($usuario);
+        if ($empresa){
+           return view('usuario.index_usuario', ['usuarios' => $usuarios]); //repassando a lista de usuÃ¡rio para blade
+         }
+                 
     }
 
     public function edit(usuario $id)
