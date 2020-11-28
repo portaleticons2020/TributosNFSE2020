@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class instituicao extends Model
 {
   protected $table = 'instituicoes';
-  protected $fillable = [
+  protected $fillable = [ 'id',
                          'instituicao',
                          'cnpj',
                          'endereco',
@@ -22,7 +22,7 @@ class instituicao extends Model
   protected $timestamp = false;
 
    public function usuario(){
-        return $this->hasMany(usuario::class, 'idinstituicao','id');
+        return $this->hasMany(usuario::class,'idinstituicao','id');
         
    }
 

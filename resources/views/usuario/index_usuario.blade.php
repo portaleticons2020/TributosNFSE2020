@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
+
 @endsection
 
 @section('js_after')
 <!-- Page JS Plugins -->
+
 <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
@@ -29,6 +31,7 @@
 @endsection
 
 @section('content')
+
 
 <div class="content">
     <div class="row">
@@ -95,7 +98,7 @@
         </div>
     </div>
     <!-- </div> -->
-
+>
 
 
 

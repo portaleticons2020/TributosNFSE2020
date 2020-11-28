@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\usuarioController;
+use App\http\Controllers\contabancariaController;
 use App\Http\Controllers\instituicaoController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('tributos/{id?}',        [instituicaoController::class, 'index']);
+//pagina inicial 
+Route::get('tributos/{id?}',                     [instituicaoController::class, 'index']);
 Route::get('/tributos/telasenha/{instituicao}',  [homecontroller::class, 'paginalogon'])->name('telasenha');
+
+//rotas Contabancaria
+Route::get('/tributos/principal/contabancaria', [contabancariaController::class, 'index'])->name('indexcontabancaria');
 
 
 
@@ -29,18 +34,6 @@ Route::get('tributos/principal/usuario_novo',        [usuarioController::class, 
 Route::get('/tributos/principal/usuario/{id?}',      [usuarioController::class, 'index'])->name('usuario.index_usuario');
 Route::get('/tributos/principal/usuario/{id?}/edit', [usuarioController::class, 'edit'])->name('usuario.edit_usuario');
 
-
-//Route::view('/usuario/index_usuario', 'usuario.index_usuario');
-//rotas de usuarios
-// Route::post('/usuario/{instituicao}',    [usuarioController::class, "logarSistema"])->name('logar');
-//rotas de controle da tela do menu incial
-// Route::get('/instituicao/{id?}',       [instituicaoController::class, 'index']);
-
-//Route::get('/tributos/login/{instituicao}',      [inicioController::class, 'index'])->name('inicial');
-// Example Routes
-// Route::match(['get', 'post'], '/dashboard', function(){
-//     return view('dashboard');
-// });
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
