@@ -18,17 +18,20 @@ class usuarioController extends Controller
        
 
         //$usuario = $instituicao->usuario::where('login', $login)->where('senha', $senha)->where('idinstituicao', $idinstituicao)->first();
-        $usuario = instituicao::find($idinstituicao)->usuario->where('login', $login)->where('senha', $senha);
+        $usuario = instituicao::find($idinstituicao)->usuario->where('login', $login)->where('senha', $senha)->first();
         
-       // dd($usuario);
+
+      //  dd($usuario);
                 // dd($empresa);
-            if ( !($usuario->isEmpty())) {
+            if ($usuario) {
 
                  //dados do usuario
                 $_SESSION['id_usuario']    = $usuario->id;
                 $_SESSION['login_usuario'] = $usuario->login;
                 $_SESSION['nome_usuario']  = $usuario->nome;
                 $_SESSION['nivel_usuario'] = $usuario->nivel;
+                $_SESSION['inst_id']       = $instituicao->id;
+                $_SESSION['inst_nome']     = $instituicao->instituicao;
 
                 if ($_SESSION['nivel_usuario'] == '1') {
                     $_SESSION['nivel_usuario_desc'] = 'Adminstrador';
@@ -63,9 +66,10 @@ class usuarioController extends Controller
     public function lista($id)
     {
         @session_start();
+        $id=$_SESSION['inst_id'];
         $empresa = instituicao::where('id',$id)->first();
         $usuarios = $empresa->usuario()->get(); //Get() retorna a lista dos objets 
-        //  dd($usuario);
+      
         if ($empresa){
            return view('usuario.index_usuario', ['usuarios' => $usuarios]); //repassando a lista de usuÃ¡rio para blade
          }
