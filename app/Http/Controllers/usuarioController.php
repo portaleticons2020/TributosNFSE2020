@@ -66,14 +66,10 @@ class usuarioController extends Controller
     public function lista($id)
     {
         @session_start();
-        $id=$_SESSION['inst_id'];
-        $empresa = instituicao::where('id',$id)->first();
-        $usuarios = $empresa->usuario()->get(); //Get() retorna a lista dos objets 
-      
-        if ($empresa){
-           return view('usuario.index_usuario', ['usuarios' => $usuarios]); //repassando a lista de usuÃ¡rio para blade
-         }
-                 
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        // $instituicao = instituicao::all();
+
+        return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
 
     public function edit(usuario $id)
@@ -86,7 +82,6 @@ class usuarioController extends Controller
     }
     public function insert(Request $request)
     {
-        
         $tabela = new usuario();
         $tabela->nome = $request->nome;
         $tabela->email = $request->email;

@@ -83,7 +83,9 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client">
-                                    <a href="{{route('usuario.edit_usuario',$usuario)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
+
+                                    <a href="{{route('usuario.edit_usuario',$usuarios)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
+
                                 </button>
                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Remove Client">
                                     <i class="fa fa-fw fa-times"></i>
