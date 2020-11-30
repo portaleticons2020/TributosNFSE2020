@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\instituicao;
 use App\Models\usuario;
@@ -15,38 +16,39 @@ class usuarioController extends Controller
         $login = $request->login;
         $senha = $request->senha;
         $idinstituicao = $instituicao->id;
-       
 
         //$usuario = $instituicao->usuario::where('login', $login)->where('senha', $senha)->where('idinstituicao', $idinstituicao)->first();
-        $usuario = instituicao::find($idinstituicao)->usuario->where('login', $login)->where('senha', $senha)->first();
-        
+        // $usuario = instituicao::find($idinstituicao)->usuario->where('login', $login)->where('senha', $senha)->first();
 
-      //  dd($usuario);
-                // dd($empresa);
-            if ($usuario) {
+        $usuario = usuario::where('login', $login)->where('senha', $senha)->first();
+        $instituicao = instituicao::find($idinstituicao);
 
-                 //dados do usuario
-                $_SESSION['id_usuario']    = $usuario->id;
-                $_SESSION['login_usuario'] = $usuario->login;
-                $_SESSION['nome_usuario']  = $usuario->nome;
-                $_SESSION['nivel_usuario'] = $usuario->nivel;
-                $_SESSION['inst_id']       = $instituicao->id;
-                $_SESSION['inst_nome']     = $instituicao->instituicao;
+        //    dd($usuario);
+        //    dd($empresa);
 
-                if ($_SESSION['nivel_usuario'] == '1') {
-                    $_SESSION['nivel_usuario_desc'] = 'Adminstrador';
-                } else if ($_SESSION['nivel_usuario'] == '2') {
-                    $_SESSION['nivel_usuario_desc'] = 'Usuário';
-                }
+        if ($usuario) {
+            @session_start();
+            //dados do usuario
+            $_SESSION['id_usuario']    = $usuario->id;
+            $_SESSION['login_usuario'] = $usuario->login;
+            $_SESSION['nome_usuario']  = $usuario->nome;
+            $_SESSION['nivel_usuario'] = $usuario->nivel;
+            $_SESSION['inst_id']       = $instituicao->id;
+            $_SESSION['inst_nome']     = $instituicao->instituicao;
 
-                if ($_SESSION['nivel_usuario'] != '') {
-                    return view('dashboard')->with('usuarios', $usuario);
-                }
-            } else {
-                echo "<script language='javascript'> window.alert('Dados Incorretos!') </script>";
-               // return redirect()->route('telasenha',$idinstituicao);
+            if ($_SESSION['nivel_usuario'] == '1') {
+                $_SESSION['nivel_usuario_desc'] = 'Adminstrador';
+            } else if ($_SESSION['nivel_usuario'] == '2') {
+                $_SESSION['nivel_usuario_desc'] = 'Usuário';
             }
-       
+
+            if ($_SESSION['nivel_usuario'] != '') {
+                return view('dashboard')->with('usuarios', $usuario);
+            }
+        } else {
+            echo "<script language='javascript'> window.alert('Dados Incorretos!') </script>";
+            // return redirect()->route('telasenha',$idinstituicao);
+        }
     }
 
     public function logout()
@@ -58,7 +60,7 @@ class usuarioController extends Controller
 
     public function index()
     {
-        
+
         $empresa = instituicao::orderby('id', 'desc')->paginate();
         return view('usuario.index_usuario')->with('instituicao', $empresa);
     }
@@ -67,7 +69,6 @@ class usuarioController extends Controller
     {
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
-        // $instituicao = instituicao::all();
 
         return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
@@ -76,33 +77,44 @@ class usuarioController extends Controller
     {
         return view('usuario.edit_usuario', ['item' => $id]);
     }
+
+
+    public function editar(Request $request, usuario $item)
+    {
+
+        $item->login  = $request->login;
+        $item->cpf    = $request->cpf;
+        $item->nome   = $request->nome;
+        $item->email  = $request->email;
+        $item->senha  = '123456';
+        $item->idinstituicao = $request->codinstituicao;
+        $item->nivel         = $request->nivel;
+        $item->bloqueado = 1;
+        $item->save();
+        
+        @session_start();
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        return view('usuario.index_usuario')->with('usuarios', $usuario);
+    }
     public function create()
-    { 
+    {
         return view('usuario.create_usuario');
     }
     public function insert(Request $request)
     {
         $tabela = new usuario();
-        $tabela->nome = $request->nome;
-        $tabela->email = $request->email;
-        $tabela->cpf = $request->cpf;
-        $tabela->telefone = $request->telefone;
-        $tabela->endereco = $request->endereco;
-        $tabela->instituicao = $request->instituicao;
-        $tabela->nivel = $request->nivel;
-        $tabela->login = 'teste';
+        $tabela->login  = $request->login;
+        $tabela->cpf    = $request->cpf;
+        $tabela->nome   = $request->nome;
+        $tabela->email  = $request->email;
+        $tabela->senha  = '123456';
+        $tabela->idinstituicao = $request->codinstituicao;
+        $tabela->nivel         = $request->nivel;
         $tabela->bloqueado = 1;
-        $tabela->senha = '123';
+        $tabela->save();
 
-        $itens = usuario::where('cpf', '=', $request->cpf)->count();
-        if ($itens > 0) {
-            echo "<script language='javascript'> window.alert('Registro já Cadastrado!') </script>";
-            return view('usuario.create_usuario');
-        }
-
-       $tabela->save();
-
-       return redirect()->route('usuario.index_usuario_lista');
-        
+        @session_start();
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
 }

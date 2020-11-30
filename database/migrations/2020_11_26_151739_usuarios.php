@@ -15,22 +15,20 @@ class Usuarios extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->Bigincrements('id')->unique();
-            $table->string('login',10);
-            $table->string('cpf',14);
-            $table->string('nome',50);
-            $table->string('email',60);
-            $table->string('senha',10);
+            $table->string('login', 10);
+            $table->string('cpf', 14);
+            $table->string('nome', 50);
+            $table->string('email', 60);
+            $table->string('senha', 10);
             $table->unsignedBigInteger('idinstituicao')->unsigned();
             $table->integer('nivel');
             $table->integer('bloqueado');
             $table->timestamps();
-            $table->foreign('idinstituicao')->references('id')->on('instituicoes');});
-            //trabalhando relacionamento
-            
-            
-            
+            $table->foreign('idinstituicao')->references('id')->on('instituicoes');
+        });
+        //trabalhando relacionamento
+    }
 
-}
 
     /**
      * Reverse the migrations.

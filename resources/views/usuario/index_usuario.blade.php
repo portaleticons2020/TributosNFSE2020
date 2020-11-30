@@ -1,14 +1,14 @@
 @extends('layouts.backend')
-@section('title','Sistema de Nota Fiscal de Serviço')
+@section('title','Usuários')
 
 <!doctype html>
 <html lang="pt-br">
 @section('css_before')
 <!-- Page JS Plugins CSS -->
-<link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
+<!-- <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}"> -->
 
 @endsection
 
@@ -25,13 +25,12 @@
 
 
 
-<script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script>
+<script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script> 
 
 
 @endsection
 
 @section('content')
-
 
 <div class="content">
     <div class="row">
@@ -73,8 +72,10 @@
                         </td>
                         <td class="text-center">
                             <?php
-                            if ($usuario->nivel == '1') {
-                                echo '<span class="badge badge-info">Adminstrador</span>';
+                            if ($usuario->nivel == '0') {
+                                echo '<span class="badge badge-warning">Visitante</span>';
+                            } else if ($usuario->nivel == '1') {
+                                echo '<span class="badge badge-danger">Adminstrador</span>';
                             } else if ($usuario->nivel == '2') {
                                 echo '<span class="badge badge-success">Usuário</span>';
                             }
@@ -83,9 +84,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client">
-
-                                    <a href="{{route('usuario.edit_usuario',$usuarios)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
-
+                                    <a href="{{route('usuario.edit_usuario',$usuario)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
                                 </button>
                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Remove Client">
                                     <i class="fa fa-fw fa-times"></i>
