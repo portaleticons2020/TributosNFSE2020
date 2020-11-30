@@ -10,6 +10,20 @@ $nome_usuario = $_SESSION['nome_usuario'];
 $nivel_usuario = $_SESSION['nivel_usuario'];
 $nivel_usuario_desc = $_SESSION['nivel_usuario_desc'];
 
+$logoEmpresa =  asset('img/') . "/instituicao_" . $id_instituicao . ".png";
+  if(!isset($this->f_exist[$logoEmpresa]['exist'])){
+    $logo = $logoEmpresa;
+} else {
+    $logo = asset('img/instituicao_padrao.png');
+}
+
+// $logoEmpresa =  asset('img/') . "/instituicao_" . $id_instituicao . ".png";
+// if (!(file_exists($logoEmpresa))) {
+//     $logo = $logoEmpresa;
+// } else {
+//     $logo = asset('img/instituicao_padrao.png');
+// }
+
 $filename =  asset('media/avatars/') . "/" . $id_usuario . ".jpg";
 if (!(file_exists($filename))) {
     $foto = $filename;
@@ -17,7 +31,6 @@ if (!(file_exists($filename))) {
     $foto = asset('media/avatars/') . "/" . 'padrao.jpg';
 }
 ?>
-
 <!doctype html>
 
 <html lang="{{ config('app.locale') }}">
@@ -159,7 +172,7 @@ if (!(file_exists($filename))) {
         <nav id="sidebar" aria-label="Main Navigation">
             <!-- Side Header -->
             <div class="content-header-logo bg-white-5">
-                <img width="200" height="50" src="{{ asset('img/logo.png') }}" alt="">
+                <img width="200" height="65" src="{{$logo}}" alt="">
             </div>
             <!-- END Side Header -->
 

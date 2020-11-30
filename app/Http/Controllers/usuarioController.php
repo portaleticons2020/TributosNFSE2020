@@ -75,7 +75,7 @@ class usuarioController extends Controller
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         // $instituicao = instituicao::all();
 
-        return view('usuario.index_usuario')->with('vUsuarios', $usuario);
+        return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
 
     public function edit(usuario $id)
@@ -88,7 +88,6 @@ class usuarioController extends Controller
     }
     public function insert(Request $request)
     {
-        
         $tabela = new usuario();
         $tabela->nome = $request->nome;
         $tabela->email = $request->email;
