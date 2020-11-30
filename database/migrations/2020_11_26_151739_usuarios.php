@@ -27,7 +27,7 @@ class Usuarios extends Migration
             $table->foreign('idinstituicao')->references('id')->on('instituicoes');});
             //trabalhando relacionamento
             
-
+            
             
 
 }
