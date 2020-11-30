@@ -34,6 +34,6 @@ class AtividadeTomadores extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('atividade_tomadores');
     }
 }

@@ -3,8 +3,8 @@
 
 use App\Models\usuario;
 
-$id_instituicao = @$_SESSION['inst_id'];
-$nome_instituicao = @$_SESSION['inst_nome'];
+$id_instituicao = $_SESSION['inst_id'];
+$nome_instituicao = $_SESSION['inst_nome'];
 $id_usuario = $_SESSION['id_usuario'];
 $nome_usuario = $_SESSION['nome_usuario'];
 $nivel_usuario = $_SESSION['nivel_usuario'];
@@ -199,7 +199,7 @@ if (!(file_exists($filename))) {
                             </li>
                             <li class="nav-main-item">
                                 <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
-                                    <span class="nav-main-link-name">Nota Fiscal</span>
+                                    <span class="nav-main-link-name">Nota Fiscal</span>1z
                                 </a>
                             </li>
                         </ul>

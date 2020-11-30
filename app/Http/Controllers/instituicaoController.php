@@ -15,6 +15,7 @@ class instituicaoController extends controller
     public function index($id=1)
     {
         $instituicao = instituicao::where('id',$id)->first();
+        
         if ($instituicao){
             $_SESSION['inst_id']       = $instituicao->id;
             $_SESSION['inst_nome']     = $instituicao->instituicao;

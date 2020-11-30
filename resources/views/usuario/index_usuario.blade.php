@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
+
 @endsection
 
 @section('js_after')
 <!-- Page JS Plugins -->
+
 <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
@@ -29,6 +31,7 @@
 @endsection
 
 @section('content')
+
 
 <div class="content">
     <div class="row">
@@ -80,7 +83,9 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client">
+
                                     <a href="{{route('usuario.edit_usuario',$usuarios)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
+
                                 </button>
                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Remove Client">
                                     <i class="fa fa-fw fa-times"></i>
@@ -95,7 +100,7 @@
         </div>
     </div>
     <!-- </div> -->
-
+>
 
 
 

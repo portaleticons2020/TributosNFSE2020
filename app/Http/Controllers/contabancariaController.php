@@ -11,9 +11,10 @@ class contabancariaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
-        //
+        echo '<h1> estamos testando esse method </h1>';
+        dd(session()->all()) ;
     }
 
     /**

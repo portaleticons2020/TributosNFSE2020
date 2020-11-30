@@ -40,7 +40,7 @@
                     <div class="span8">
                         <div class="container-signin">
                             <legend>Entre com o Usuário</legend>
-                            <form action="{{ route('logar',$instituicao)}}" method="post" id='loginForm' class='form-signin' autocomplete='off'>
+                            <form action="{{ route('logar',$instituicao->id)}}" method="post" id='loginForm' class='form-signin' autocomplete='off'>
                             @csrf
                                 <div class="form-inner">
                                     <div class="input-prepend">
