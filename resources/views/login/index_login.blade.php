@@ -40,6 +40,7 @@
                     <div class="span8">
                         <div class="container-signin">
                             <legend>Entre com o Usuário</legend>
+                 
                             <form action="{{ route('logar',$instituicao->id)}}" method="post" id='loginForm' class='form-signin' autocomplete='off'>
                             @csrf
                                 <div class="form-inner">
@@ -91,6 +92,7 @@
                 $("[rel=tooltip]").tooltip();
             });
         </script>
+        
         <script src="{{ asset('app-assets/js/bootstrap/bootstrap-transition.js') }}" type="text/javascript" ></script>
         <script src="{{ asset('app-assets/js/bootstrap/bootstrap-alert.js') }}" type="text/javascript" ></script>
         <script src="{{ asset('app-assets/js/bootstrapbootstrap-modal.js') }}" type="text/javascript" ></script>

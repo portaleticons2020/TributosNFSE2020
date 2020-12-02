@@ -1,5 +1,13 @@
 @extends('layouts.backend')
 @section('content')
+
+<?php
+ session_start();
+ $vCodInst = @$_SESSION['inst_id'];
+?>
+
+
+
 <!doctype html>
 <html lang="pt-br">
 <!-- <div class="bg-body-light"> -->
@@ -15,7 +23,7 @@
 
 <!-- </div> -->
 <div class="content" style="color:black;">
-    <form method="POST" action="{{route('usuario.insert',1)}}">
+    <form method="POST" action="{{route('usuario.insert', $vCodInst  )}}">
         @csrf
         <div class="row">
             <div class="col-md-8">

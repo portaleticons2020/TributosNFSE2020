@@ -3,16 +3,22 @@
 
 <!doctype html>
 <html lang="pt-br">
-@section('css_before')
-<!-- Page JS Plugins CSS -->
-<link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
-<link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
-<link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
 
-@endsection
+<?php
+if (!isset($id)) {
+    $id = "";
+}
+?>
+
+
+
 
 @section('content')
+
+
+
+
+
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -25,17 +31,41 @@
             <h2>Cadastro de Usuários</h2>
         </div>
         <div class="col-sm-6 text-right h1">
-            <a class="btn btn-primary" href="{{route('usuario.inserir')}}"><i class="fa fa-plus"></i> Inserir Novo</a>
-            <button type="button" class="btn btn-danger js-click-ripple-enabled" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1;"><span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
-                <i class="fa fa-fw fa-plus mr-1"></i fa-times> Fechar </button>
+            <a class="btn btn-primary" href="{{route('usuario.inserir')}}">
+                <i class="fa fa-plus">
+                    <span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
+                </i> Inserir Novo</a>
+            <!-- <button type="button" class="btn btn-danger js-click-ripple-enabled" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1">
+                <span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
+                <i class="fa fa-fw fa-plus mr-1"></i fa-times> Fechar
+            </button> -->
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+            }
+        });
+    })
+</script>
+
+
+
+
+<?php
+if (@$id != "") {
+    echo "<script>$('#exampleModal').modal('show');</script>";
+}
+?>
+
 <body>
     <div class="block">
         <div class="block-content block-content-full">
-            <table id="example" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
+            <table id="dataTable" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">Cód.</th>
@@ -81,7 +111,12 @@
                                 <form id="delete-form-{{$usuario->id}}" + action="{{route('usuario.delete', $usuario)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
-                                <!-- </button> -->
+
+                                <form type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" method="post">
+                                    @csrf @method('DELETE')
+                                </form>
+                                
+
                             </div>
         </div>
 
@@ -92,31 +127,38 @@
     </td>
     @endforeach
 
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @endsection
 
-    @section('js_after')
-    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script>
 
-    @endsection
+
 </body>
-
-
-<script>
-    $(document).ready(function() {
-                $('#example').DataTable({
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
-                    }
-                });
-    }
-</script>
 
 
 </html>

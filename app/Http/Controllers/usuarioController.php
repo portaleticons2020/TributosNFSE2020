@@ -129,4 +129,11 @@ class usuarioController extends Controller
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
      }
+
+     public function modal($id){
+        @session_start();
+        $item = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        return view('usuario.index_usuario', ['usuarios' => $item, 'id' => $id]);
+
+     }
 }
