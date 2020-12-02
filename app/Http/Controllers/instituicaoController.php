@@ -12,16 +12,16 @@ class instituicaoController extends controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id=1)
+    public function index($id)
     {
         $instituicao = instituicao::where('id',$id)->first();
-        
+       
         if ($instituicao){
+            @session_start();
             $_SESSION['inst_id']       = $instituicao->id;
             $_SESSION['inst_nome']     = $instituicao->instituicao;
             $_SESSION['inst_CNPJ']     = $instituicao->cnpj;
             $_SESSION['inst_liberada'] = $instituicao->liberada;
-
            return view('inicio/index_abertura')->with('instituicao', $instituicao);
            
         }   

@@ -16,7 +16,7 @@
 <div class="content" style="color:black;">
     <form method="POST" action="{{route('usuario.editar',$item)}}">
         @csrf
-        @method('put')
+        @method('patch')
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">

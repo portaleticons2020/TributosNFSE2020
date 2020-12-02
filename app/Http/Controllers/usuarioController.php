@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\instituicao;
 use App\Models\usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class usuarioController extends Controller
@@ -60,15 +61,14 @@ class usuarioController extends Controller
 
     public function index()
     {
-
         $empresa = instituicao::orderby('id', 'desc')->paginate();
         return view('usuario.index_usuario')->with('instituicao', $empresa);
     }
 
-    public function lista($id)
+    public function lista()
     {
         @session_start();
-        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->orderby('id', 'desc')->paginate();
 
         return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
@@ -81,20 +81,23 @@ class usuarioController extends Controller
 
     public function editar(Request $request, usuario $item)
     {
+        $data = array(
+            'nome'          => $request->nome,
+            'login'         => $request->login,
+            'cpf'           => $request->cpf,
+            'email'         => $request->email,
+            'idinstituicao' => $request->codinstituicao,
+            'nivel'         => $request->nivel,
+            'bloqueado'     => 1
+        );
 
-        $item->login  = $request->login;
-        $item->cpf    = $request->cpf;
-        $item->nome   = $request->nome;
-        $item->email  = $request->email;
-        $item->senha  = '123456';
-        $item->idinstituicao = $request->codinstituicao;
-        $item->nivel         = $request->nivel;
-        $item->bloqueado = 1;
-        $item->save();
-        
+        DB::table('usuarios')->where('id', $request->id)->update($data);
+
+
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
+
     }
     public function create()
     {
@@ -117,4 +120,13 @@ class usuarioController extends Controller
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
+    public function delete(Request $request){
+        DB::delete('DELETE FROM usuarios WHERE id = ?', [$request->id]); 
+
+        echo $request->id;
+        
+        @session_start();
+        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
+        return view('usuario.index_usuario')->with('usuarios', $usuario);
+     }
 }

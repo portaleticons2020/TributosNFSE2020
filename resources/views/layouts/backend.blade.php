@@ -1,8 +1,5 @@
 <?php
 @session_start();
-
-use App\Models\usuario;
-
 $id_instituicao = $_SESSION['inst_id'];
 $nome_instituicao = $_SESSION['inst_nome'];
 $id_usuario = $_SESSION['id_usuario'];
@@ -11,11 +8,14 @@ $nivel_usuario = $_SESSION['nivel_usuario'];
 $nivel_usuario_desc = $_SESSION['nivel_usuario_desc'];
 
 $logoEmpresa =  asset('img/') . "/instituicao_" . $id_instituicao . ".png";
-  if(!isset($this->f_exist[$logoEmpresa]['exist'])){
+if (!isset($this->f_exist[$logoEmpresa]['exist'])) {
     $logo = $logoEmpresa;
 } else {
     $logo = asset('img/instituicao_padrao.png');
 }
+
+
+
 
 // $logoEmpresa =  asset('img/') . "/instituicao_" . $id_instituicao . ".png";
 // if (!(file_exists($logoEmpresa))) {
@@ -24,12 +24,23 @@ $logoEmpresa =  asset('img/') . "/instituicao_" . $id_instituicao . ".png";
 //     $logo = asset('img/instituicao_padrao.png');
 // }
 
-$filename =  asset('media/avatars/') . "/" . $id_usuario . ".jpg";
-if (!(file_exists($filename))) {
+
+$filename =  '/media/avatars/' . $id_usuario . ".jpg";
+if (file_exists($filename)) {
     $foto = $filename;
 } else {
     $foto = asset('media/avatars/') . "/" . 'padrao.jpg';
 }
+
+// $filename =  asset('media/avatars/') . "/" . $id_usuario . ".jpg";
+//   if(!isset($this->f_exist[$filename]['exist'])){
+//     $foto = $filename;
+// } else {
+//     $foto = asset('media/avatars/') . "/" . 'padrao.jpg';
+// }
+
+// $nome_instituicao = $filename;
+
 ?>
 <!doctype html>
 
@@ -62,7 +73,7 @@ if (!(file_exists($filename))) {
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
     <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/flat.css') }}">
 
-    
+
     <script src="{{ URL::asset('js/plugins/jquery-validation/jquery.validate.js') }}"></script>
     <script src="{{ URL::asset('js/core/jquery.min.js') }}"></script>
 
@@ -71,6 +82,8 @@ if (!(file_exists($filename))) {
     <link rel="stylesheet" href="{{ URL::asset('js/plugins/datatables/dataTables.bootstrap4.css')}}">
     <script src="{{ URL::asset('/js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ URL::asset('/js/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+  
 
 
 
@@ -199,7 +212,7 @@ if (!(file_exists($filename))) {
                             </li>
                             <li class="nav-main-item">
                                 <a class="nav-main-link{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">
-                                    <span class="nav-main-link-name">Nota Fiscal</span>1z
+                                    <span class="nav-main-link-name">Nota Fiscal</span>
                                 </a>
                             </li>
                         </ul>
@@ -222,9 +235,14 @@ if (!(file_exists($filename))) {
             <!-- Header Content -->
             <div class="content-header">
                 <!-- Left Section -->
-                <div>
-                    <h3 class="content"> {{$nome_instituicao}} </h3>
+                <div class="d-flex align-items-center">
+                    <div class="middle">
+                        <h3 class="content"> {{$nome_instituicao}} </h3><br>
+                    </div>
                 </div>
+
+
+
                 <!-- END Left Section -->
 
                 <!-- Right Section -->
@@ -381,7 +399,7 @@ if (!(file_exists($filename))) {
         </main>
         <!-- END Main Container -->
 
-        
+
 
         <!-- Footer -->
         <footer id="page-footer" class="bg-body-light">
@@ -399,7 +417,7 @@ if (!(file_exists($filename))) {
 
         <!-- Apps Modal -->
         <!-- Opens from the modal toggle button in the header -->
-        
+
         <!-- END Apps Modal -->
     </div>
     <!-- END Page Container -->
@@ -408,7 +426,7 @@ if (!(file_exists($filename))) {
     <script src="{{ mix('js/oneui.app.js') }}"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
 
-        
+
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->

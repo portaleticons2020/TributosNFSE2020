@@ -1,7 +1,16 @@
+
+
+<?php
+@session_start();
+$id_instituicao = $_SESSION['inst_id'];
+$nome_instituicao = $_SESSION['inst_nome'];
+?>
+<!-- Hero -->
+
 @extends('layouts.simple')
 @section('content')
 
-<!-- Hero -->
+
 
 <div class="bg-image">
     <div class="hero bg-white overflow-hidden">
@@ -16,8 +25,8 @@
                     <br>
                     <br>
                     <br>
-                    <img id="logomarca" class="img" src="{{ URL::asset('img/logopeq.png') }}"><br>
-                    Eticons <span class="font-w300">Sistema de Tributos</span><br>
+                    <img id="logomarca" class="img" src="{{ URL::asset('img/instituicao')}}_{{$id_instituicao}}.png"><br>
+                    <span class="font-w300 mb-3">{{$nome_instituicao}}</span><br>
                 </h1>
                 <h2 class=" font-w200 text-muted mb-3 invisible" data-toggle="appear" data-class="animated fadeInDown" data-timeout="600">
                     Bem vindos ao sistema de Tributos
@@ -75,7 +84,7 @@
                         </div>
 
                         <div class="shadow-lg p-3 mb-10 bg-white rounded col-sm-6 col-xl-3 js-appear-enabled animated fadeIn" data-toggle="appear">
-                            <a class="block block-link-pop" href="{{route('telasenha', $instituicao)}}">
+                            <a class="block block-link-pop" href="{{route('telasenha', $id_instituicao)}}">
                                 <div class="block block-rounded block-fx-pop">
                                     <div class="block-content block-content-full">
                                         <div class="py-4">
@@ -95,16 +104,14 @@
 
             <!-- <span class="m-2 d-inline-block invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="600">
                 <a class="btn btn-alt-success px-4 py-2" href="/dashboard">
-                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Solicitar Acesso -->
+                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Solicitar Acesso
+                </a>
+            </span> -->
 
         </div>
     </div>
 </div>
-</a>
-</span>
 </div>
-</div>
-</div>
-</div>
+
 <!-- END Hero -->
 @endsection

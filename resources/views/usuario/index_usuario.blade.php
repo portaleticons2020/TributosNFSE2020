@@ -5,32 +5,19 @@
 <html lang="pt-br">
 @section('css_before')
 <!-- Page JS Plugins CSS -->
-<!-- <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
+<link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">''
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}"> -->
-
-@endsection
-
-@section('js_after')
-<!-- Page JS Plugins -->
-
-<script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
-
-
-
-<script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script> 
-
+<link rel="stylesheet" href="{{ asset('css/oneui.min.css') }}">
 
 @endsection
 
 @section('content')
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
 
 <div class="content">
     <div class="row">
@@ -46,11 +33,9 @@
 </div>
 
 <body>
-    <!-- <div class="content"> -->
     <div class="block">
         <div class="block-content block-content-full">
-            <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-            <table id="dtTabela" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
+            <table id="example" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">Cód.</th>
@@ -81,29 +66,58 @@
                             }
                             ?>
                         </td>
+
                         <td class="text-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client">
-                                    <a href="{{route('usuario.edit_usuario',$usuario)}}"> <i class="fa fa-fw fa-pencil-alt"></i></a>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Remove Client">
-                                    <i class="fa fa-fw fa-times"></i>
-                                </button>
+                                <!-- <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client"> -->
+                                <a class="table-action" data-toggle="tooltip" data-original-title="Editar Usuário" href="{{route('usuario.edit_usuario',$usuario)}}">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Deletar Usuário" href="{{ route('usuario.delete',$usuario) }}" onclick="event.preventDefault();
+                                document.getElementById('delete-form-{{$usuario->id}}').submit();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <form id="delete-form-{{$usuario->id}}" + action="{{route('usuario.delete', $usuario)}}" method="post">
+                                    @csrf @method('DELETE')
+                                </form>
+                                <!-- </button> -->
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-            </table>
         </div>
+
+
+        @csrf
+        @method('DELETE')
     </div>
-    <!-- </div> -->
->
+    </td>
+    @endforeach
 
+    @endsection
 
+    @section('js_after')
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script>
 
     @endsection
 </body>
+
+
+<script>
+    $(document).ready(function() {
+                $('#example').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                    }
+                });
+    }
+</script>
+
+
 
 </html>

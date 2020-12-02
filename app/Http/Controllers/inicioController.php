@@ -10,6 +10,6 @@ class inicioController extends Controller
 {
     public function index(instituicao $instituicao)
     {
-       return view('/tributos', 'landing')->with('instituicao',$instituicao);
+       return view('/tributos/{id?}', 'landing')->with('instituicao',$instituicao);
     }
 }

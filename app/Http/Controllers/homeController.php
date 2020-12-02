@@ -13,9 +13,10 @@ class homeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id=1)
+    public function index($id)
     {
         $instituicao = instituicao::where('id',$id)->first();
+
         if ($instituicao){
             $_SESSION['inst_id']       = $instituicao->id;
             $_SESSION['inst_nome']     = $instituicao->instituicao;
