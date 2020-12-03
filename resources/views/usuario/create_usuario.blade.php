@@ -7,10 +7,8 @@
 ?>
 
 
-
 <!doctype html>
 <html lang="pt-br">
-<!-- <div class="bg-body-light"> -->
 <div class="content content-full">
     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
         <div class="col-sm-6">
@@ -18,8 +16,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- </div> -->
 <div class="content" style="color:black;">
@@ -61,9 +57,9 @@
                         <option value='0'>Selecionar Instituição</option>
                         <?php
 
-                        use App\Models\instituicao;
+                        use App\Models\instituicoe;
 
-                        $tabela = instituicao::all();
+                        $tabela = instituicoe::all();
                         ?>
                         @foreach ($tabela as $item)
                         <option value='{{$item->id}}'>{{$item->instituicao}}</option>

@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+
+
 use App\tomador;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class instituicao extends Model
-{
+
+class instituicoe extends Model
+ {
+  public $timestamps = false;
+
   protected $table = 'instituicoes';
   protected $fillable = [ 'id',
                          'instituicao',
@@ -19,11 +23,10 @@ class instituicao extends Model
                          'fone',
                          'responsavel',
                          'liberada'];
-  protected $timestamp = false;
+  
 
    public function usuario(){
         return $this->hasMany(usuario::class,'idinstituicao','id');
-        
    }
 
    public function tomador(){

@@ -3,14 +3,14 @@
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\usuarioController;
 use App\http\Controllers\contabancariaController;
-use App\Http\Controllers\instituicaoController;
+use App\Http\Controllers\instituicoeController;
 use Illuminate\Support\Facades\Route;
 
 //pagina inicial 
 Route::get('/tributos/telasenha/{instituicao}',  [homecontroller::class, 'paginalogon'])->name('telasenha');
 
 //Rotas Contabancaria
-Route::get('/tributos/principal/contabancaria', [contabancariaController::class, 'index'])->name('indexcontabancaria');
+Route::post('/tributos/principal/contabancaria', [contabancariaController::class, 'index'])->name('indexcontabancaria');
 
 //Rotas usuarios
 Route::post('/tributos/principal/{instituicao}',       [usuarioController::class, 'logarSistema'])->name('logar');
@@ -25,10 +25,14 @@ Route::get('tributos/principal/{id?}/delete',          [usuarioController::class
 
 
 //Rotas Instituições
-Route::get('tributos/{id?}',                           [instituicaoController::class, 'index']);
-Route::get('/tributos/principal/instituicao_lista',    [instituicaoController::class, 'lista'])->name('instituicao.index_instituicao_lista');
-Route::post('tributos/principal/instituicao_lista',    [instituicaoController::class, 'insert'])->name('instituicao.insert');
-Route::get('tributos/principal/instituicao_nova',      [instituicaoController::class, 'create'])->name('instituicao.inserir');
+Route::get('tributos/{id?}',                                [instituicoeController::class, 'index']);
+Route::get('/tributos/principal/instituicao_lista/{id?}',   [instituicoeController::class, 'lista'])->name('instituicao.index_instituicao_lista');
+Route::post('tributos/principal/instituicao_lista/{id?}',   [instituicoeController::class, 'insert'])->name('instituicao.insert');
+Route::get('tributos/principal/instituicao_nova',           [instituicoeController::class, 'create'])->name('instituicao.inserir');
+Route::get('/tributos/principal/instituicao/{id?}/edit',    [instituicoeController::class, 'edit'])->name('instituicao.edit_instituicao');
+Route::patch('tributos/principal/instituicao_lista/{id?}',  [instituicoeController::class, 'editar'])->name('instituicao.editar');
+Route::delete('tributos/principal/instituicao_lista/{id?}', [instituicoeController::class, 'delete'])->name('instituicao.delete');
+Route::get('tributos/principal/{id?}/delete',               [instituicoeController::class, 'modal'])->name('instituicao.modal');
 
 //paginas modelo para o desenvolvimento
 Route::view('/pages/slick', 'pages.slick');

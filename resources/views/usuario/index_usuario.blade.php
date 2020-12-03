@@ -10,15 +10,7 @@ if (!isset($id)) {
 }
 ?>
 
-
-
-
 @section('content')
-
-
-
-
-
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -35,10 +27,6 @@ if (!isset($id)) {
                 <i class="fa fa-plus">
                     <span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
                 </i> Inserir Novo</a>
-            <!-- <button type="button" class="btn btn-danger js-click-ripple-enabled" data-toggle="click-ripple" style="overflow: hidden; position: relative; z-index: 1">
-                <span class="click-ripple animate" style="height: 85.5938px; width: 85.5938px; top: -13.7969px; left: 13.2031px;"></span>
-                <i class="fa fa-fw fa-plus mr-1"></i fa-times> Fechar
-            </button> -->
         </div>
     </div>
 </div>
@@ -99,56 +87,40 @@ if (@$id != "") {
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <!-- <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#modal-block-normal" title="" data-original-title="Edit Client"> -->
                                 <a class="table-action" data-toggle="tooltip" data-original-title="Editar Usuário" href="{{route('usuario.edit_usuario',$usuario)}}">
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                                 &nbsp;&nbsp;&nbsp;
-                                <a class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Deletar Usuário" href="{{ route('usuario.delete',$usuario) }}" onclick="event.preventDefault();
-                                document.getElementById('delete-form-{{$usuario->id}}').submit();">
-                                    <i class="fas fa-trash"></i>
+                                <a class="table-action" href="{{route('usuario.modal', $usuario)}}"  data-toggle="modal"  data-target="#basicExampleModal" method="post">
+                                    <i data-toggle="tooltip" data-original-title="excluir Usuário" class="fas fa-trash"></i>
                                 </a>
-                                <form id="delete-form-{{$usuario->id}}" + action="{{route('usuario.delete', $usuario)}}" method="post">
-                                    @csrf @method('DELETE')
-                                </form>
-
-                                <form type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" method="post">
-                                    @csrf @method('DELETE')
-                                </form>
-                                
-
                             </div>
         </div>
-
-
         @csrf
         @method('DELETE')
     </div>
     </td>
     @endforeach
 
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-        Launch demo modal
-    </button>
-
     <!-- Modal -->
     <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <p>Deseja excluir o registro de nome {{$usuario->nome}} ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <form id="delete-form-{{$usuario->id}}" + action="{{route('usuario.delete', $usuario)}}" method="post">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
                 </div>
             </div>
         </div>

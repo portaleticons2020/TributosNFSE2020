@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\instituicao;
+use App\Models\instituicoe;
 use App\Models\usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class usuarioController extends Controller
 {
-    public function logarSistema(request $request, instituicao $instituicao)
+    public function logarSistema(request $request, instituicoe $instituicao)
     {
 
         $login = $request->login;
@@ -22,7 +22,7 @@ class usuarioController extends Controller
         // $usuario = instituicao::find($idinstituicao)->usuario->where('login', $login)->where('senha', $senha)->first();
 
         $usuario = usuario::where('login', $login)->where('senha', $senha)->first();
-        $instituicao = instituicao::find($idinstituicao);
+        $instituicao = instituicoe::find($idinstituicao);
 
         //    dd($usuario);
         //    dd($empresa);
@@ -61,7 +61,7 @@ class usuarioController extends Controller
 
     public function index()
     {
-        $empresa = instituicao::orderby('id', 'desc')->paginate();
+        $empresa = instituicoe::orderby('id', 'desc')->paginate();
         return view('usuario.index_usuario')->with('instituicao', $empresa);
     }
 
@@ -122,9 +122,7 @@ class usuarioController extends Controller
     }
     public function delete(Request $request){
         DB::delete('DELETE FROM usuarios WHERE id = ?', [$request->id]); 
-
-        echo $request->id;
-        
+       
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);

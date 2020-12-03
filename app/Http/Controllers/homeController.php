@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\instituicao;
+use App\Models\instituicoe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class homeController extends Controller
      */
     public function index($id)
     {
-        $instituicao = instituicao::where('id',$id)->first();
+        $instituicao = instituicoe::where('id',$id)->first();
 
         if ($instituicao){
             $_SESSION['inst_id']       = $instituicao->id;
@@ -27,7 +27,7 @@ class homeController extends Controller
         }    
     }
 
-    public function paginalogon(instituicao $instituicao){
+    public function paginalogon(instituicoe $instituicao){
        
                return view('/login/index_login')->with('instituicao', $instituicao);
     }

@@ -52,10 +52,10 @@
                     <select class="form-control" id="codinstituicao" name="codinstituicao">
                         <?php
 
-                        use App\Models\instituicao;
+                        use App\Models\instituicoe;
 
-                        $tabela = instituicao::all();
-                        $instituicao = instituicao::where('id', '=', $item->idinstituicao)->first();
+                        $tabela = instituicoe::all();
+                        $instituicao = instituicoe::where('id', '=', $item->idinstituicao)->first();
                         if ($item->idinstituicao != '0') {
                             $instituicao = $instituicao->instituicao;
                         } else {

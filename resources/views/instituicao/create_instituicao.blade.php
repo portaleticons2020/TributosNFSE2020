@@ -1,11 +1,14 @@
 @extends('layouts.backend')
 @section('content')
 
+<?php
+ session_start();
+ $vCodInst = @$_SESSION['inst_id'];
+?>
 
 
 <!doctype html>
 <html lang="pt-br">
-<!-- <div class="bg-body-light"> -->
 <div class="content content-full">
     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
         <div class="col-sm-6">
@@ -17,13 +20,13 @@
 
 <!-- </div> -->
 <div class="content" style="color:black;">
-    <form method="POST" action="{{route('instituicao.insert')}}">
+    <form method="POST" action="{{route('instituicao.insert',$vCodInst)}}">
         @csrf
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Instituição</label>
-                    <input type="text" class="form-control" id="instituicao" name="instituicao" required>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
                 </div>
             </div>
 
@@ -82,9 +85,6 @@
             <button type="submit" class="btn btn-primary">Salvar</button>
             <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
         </p>
-
-        <button type="button" class="btn btn-sm btn-primary push" data-toggle="modal" data-target="#modal-block-fadein">Launch Modal</button>
-        <button type="button" class="btn btn-sm btn-primary push" data-toggle="modal" data-target="#modal-block-normal">Launch Modal</button>
 </div>
 </form>
 
