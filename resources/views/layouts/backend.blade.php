@@ -20,8 +20,6 @@ if (file_exists($filename)) {
 } else {
     $foto = asset('media/avatars/') . "/" . 'padrao.jpg';
 }
-
-
 ?>
 
 @section('js_after')
@@ -394,6 +392,7 @@ if (file_exists($filename)) {
 
 
             <!-- Main Container -->
+
             <main id="main-container">
                 @yield('content')
             </main>
@@ -401,6 +400,7 @@ if (file_exists($filename)) {
 
             <!-- END Apps Modal -->
         </div>
+
         <!-- END Page Container -->
 
         <!-- OneUI Core JS -->

@@ -87,9 +87,6 @@
 </div>
 </form>
 
-<!-- </div> -->
-<!-- </div> -->
-<!-- END Your Block -->
 
 @endsection
 </body>

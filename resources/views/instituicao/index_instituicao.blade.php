@@ -1,8 +1,6 @@
 @extends('layouts.backend')
 @section('title','Instituição')
 
-<!doctype html>
-<html lang="pt-br">
 
 
 <?php
@@ -31,11 +29,12 @@ if (!isset($id)) {
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#dataTable').DataTable({
+            "order": [[0, "desc" ]],
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                "url": "{{ URL::asset('js/Portuguese-Brasil.json')}}"
             }
         });
     })
@@ -51,6 +50,7 @@ if (!isset($id)) {
                         <th style="width: 50%;">Nome da Instituição</th>
                         <th>CNPJ</th>
                         <th>Responsável</th>
+                        <th>Status</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
@@ -67,6 +67,16 @@ if (!isset($id)) {
                         <td class="d-none d-sm-table-cell font-size-sm">
                             <em class="text-muted">{{$instit->responsavel}}</em>
                         </td>
+                        <td class="text-center">
+                            <?php
+                            if ($instit->liberada == '0') {
+                                echo '<span class="badge badge-danger">Inativo</span>';
+                            } else if ($instit->liberada == '1') {
+                                echo '<span class="badge badge-success">Liberado</span>';
+                            }
+                            ?>
+                        </td>
+
 
                         <td class="text-center">
                             <div class="btn-group">
@@ -78,12 +88,13 @@ if (!isset($id)) {
                                     <i data-toggle="tooltip" data-original-title="excluir Instituição" class="fas fa-trash"></i>
                                 </a>
                             </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        @csrf
-        @method('DELETE')
     </div>
-    </td>
-    @endforeach
 
 
     <!-- Modal -->
@@ -97,7 +108,7 @@ if (!isset($id)) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Deseja excluir a instituição {{$instit->instituicao}} ?</p>
+                    <p>Deseja excluir a instituição ?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -113,7 +124,3 @@ if (!isset($id)) {
     @endsection
 
 </body>
-
-
-
-</html>

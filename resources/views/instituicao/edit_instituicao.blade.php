@@ -21,11 +21,7 @@
         @method('patch')
 
 
-        <?php
-        $statusRecebido = (isset($_REQUEST['liberada'])) ? $_REQUEST['liberada'] : '0';
-        echo $statusRecebido . "<br/>";
 
-        ?>
 
         <div class="row">
             <div class="col-md-8">
@@ -78,14 +74,8 @@
                     <input value='{{$item->responsavel}}' type="text" class="form-control" id="responsavel" name="responsavel">
                 </div>
             </div>
-            <!-- <div class="col-md-2">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Liberada</label>
-                    <input value='{{$item->liberada}}' type="text" class="form-control" id="liberada" name="liberada">
-                </div>
-            </div> -->
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="{{old('is_current')}}" id="liberada" name="liberada">';
+                <input class="form-check-input" type="checkbox" value="1" id="liberada" name="liberada" value="1"<?php echo ($item->liberada == 1 ? ' checked' : '')?> >
                 <label class="form-check-label" for="example-checkbox-inline1">Liberada</label>
             </div>
         </div>
@@ -95,10 +85,9 @@
             <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
         </p>
 </div>
+    
 </form>
-<?php
-if (isset($_POST['liberada'])) echo ('<p>' . $_POST['liberada'] . '</p>');
-?>
+
 
 @endsection
 </body>

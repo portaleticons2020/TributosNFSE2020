@@ -2,8 +2,8 @@
 @section('content')
 
 <?php
- session_start();
- $vCodInst = @$_SESSION['inst_id'];
+session_start();
+$vCodInst = @$_SESSION['inst_id'];
 ?>
 
 
@@ -18,7 +18,7 @@
 </div>
 
 
-<!-- </div> -->
+
 <div class="content" style="color:black;">
     <form method="POST" action="{{route('instituicao.insert',$vCodInst)}}">
         @csrf
@@ -73,20 +73,20 @@
                     <input type="text" class="form-control" id="responsavel" name="responsavel" required>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Liberada</label>
-                    <input type="text" class="form-control" id="liberada" name="liberada" required>
-                </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="1" id="liberada" name="liberada" value="1">
+                <label class="form-check-label" for="example-checkbox-inline1">Liberada</label>
             </div>
+
         </div>
-        
+
         <p align="right">
             <button type="submit" class="btn btn-primary">Salvar</button>
             <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
         </p>
+    </form>
 </div>
-</form>
 
 
 @endsection

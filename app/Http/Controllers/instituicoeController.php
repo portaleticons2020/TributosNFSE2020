@@ -60,7 +60,7 @@ class instituicoeController extends controller
             'cep'            => $request->cep,
             'fone'           => $request->telefone,
             'responsavel'    => $request->responsavel,
-            'liberada'       => $request->has('is_current');
+            'liberada'       => (!request()->has('liberada') == '1' ? '0' : '1')
         );
 
         DB::table('instituicoes')->where('id', $request->id)->update($data);
@@ -84,7 +84,7 @@ class instituicoeController extends controller
                 'cep'            => $request->cep,
                 'fone'           => $request->telefone,
                 'responsavel'    => $request->responsavel,
-                'liberada'       => $request->liberada
+                'liberada'       => (!request()->has('liberada') == '1' ? '0' : '1')
             ]);  
             @session_start();
             $instituicao = instituicoe::first()->paginate();

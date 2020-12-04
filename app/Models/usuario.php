@@ -23,7 +23,7 @@ class usuario extends Model
            
    }
    
-   public $timestamps = false;
+
       
   
 }
