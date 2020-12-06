@@ -36,7 +36,7 @@ class usuarioController extends Controller
             $_SESSION['nivel_usuario'] = $usuario->nivel;
             $_SESSION['inst_id']       = $instituicao->id;
             $_SESSION['inst_nome']     = $instituicao->instituicao;
-            $_SESSION['id_delete']     = ''; 
+            $_SESSION['id_delete']     = '';
 
             if ($_SESSION['nivel_usuario'] == '1') {
                 $_SESSION['nivel_usuario_desc'] = 'Adminstrador';
@@ -62,17 +62,12 @@ class usuarioController extends Controller
 
     public function index()
     {
-        $empresa = instituicoe::orderby('id', 'desc')->paginate();
-        return view('usuario.index_usuario')->with('instituicao', $empresa);
-    }
-
-    public function lista()
-    {
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->orderby('id', 'desc')->paginate();
 
         return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
+
 
     public function edit(usuario $id)
     {
@@ -98,7 +93,6 @@ class usuarioController extends Controller
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->orderby('id', 'desc')->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
-
     }
     public function create()
     {
@@ -114,24 +108,22 @@ class usuarioController extends Controller
         $tabela->senha  = '123456';
         $tabela->idinstituicao = $request->codinstituicao;
         $tabela->nivel         = $request->nivel;
-        $tabela->bloqueado = $request->bloqueado;
+        $tabela->bloqueado = 1;
         $tabela->save();
 
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
     }
-    public function delete(usuario $item){
-        DB::delete('DELETE FROM usuarios WHERE id = ?', [$item]); 
-       
+    public function delete($id)
+    {
+        usuario::find($id)->delete();
+
         @session_start();
         $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
         return view('usuario.index_usuario')->with('usuarios', $usuario);
-     }
 
-     public function modal($id){
-        @session_start();
-        $usuario = usuario::where('idinstituicao', @$_SESSION['inst_id'])->paginate();
-        return view('usuario.index_usuario', ['usuario' => $usuario, 'id' => $id]);
-     }
+    }
+
+
 }

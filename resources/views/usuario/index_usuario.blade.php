@@ -3,13 +3,13 @@
 @section('content')
 
 
-<?php
-@session_start();
 
+<?php
 if (!isset($id)) {
     $id = "";
 }
 ?>
+
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -19,7 +19,7 @@ if (!isset($id)) {
 <div class="content">
     <div class="row">
         <div class="col-sm-6">
-            <h2>Cadastro de Usuários {{$id}}</h2>
+            <h2>Cadastro de Usuários</h2>
         </div>
         <div class="col-sm-6 text-right h1">
             <a class="btn btn-primary" href="{{route('usuario.inserir')}}">
@@ -30,7 +30,9 @@ if (!isset($id)) {
     </div>
 </div>
 
-<script type="text/javascript">
+
+
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         $('#dataTable').DataTable({
             "order": [
@@ -41,97 +43,76 @@ if (!isset($id)) {
             }
         });
     })
-</script>
+</script> -->
 
 
 
-<div class="block">
-    <div class="block-content block-content-full">
-        <table id="dataTable" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
-            <thead class="thead-dark">
-                <tr>
-                    <th class="text-center">Cód.</th>
-                    <th style="width: 50%;">Nome</th>
-                    <th>Email</th>
-                    <th>Nível</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($usuarios as $usuario)
-                <tr>
-                    <td class="text-center">{{$usuario->id}}</td>
-                    <td class="font-w600">
-                        <a href="javascript:void(0)">{{$usuario->nome}}</a>
-                    </td>
-                    <td class="d-none d-sm-table-cell font-size-sm">
-                        <em class="text-muted">{{$usuario->email}}</em>
-                    </td>
-                    <td class="text-center">
-                        <?php
-                        if ($usuario->nivel == '0') {
-                            echo '<span class="badge badge-warning">Visitante</span>';
-                        } else if ($usuario->nivel == '1') {
-                            echo '<span class="badge badge-danger">Adminstrador</span>';
-                        } else if ($usuario->nivel == '2') {
-                            echo '<span class="badge badge-success">Usuário</span>';
-                        }
-                        ?>
-                    </td>
-
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <a class="table-action" data-toggle="tooltip" data-original-title="Editar Usuário" href="{{route('usuario.edit_usuario',$usuario)}}">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-                            &nbsp;&nbsp;&nbsp;
-                            <a class="table-action" href="{{route('usuario.modal', $usuario)}}" data-toggle="modal" data-target="#modaldelete" method="post">
-                                <i data-toggle="tooltip" data-original-title="excluir usuário" class="fas fa-trash"></i>
-                            </a>
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-sm  table-vcenter js-dataTable-full">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Cód.</th>
+                            <th style="width: 50%;">Nome</th>
+                            <th>Email</th>
+                            <th>Nível</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($usuarios as $usuario)
+                        <tr>
+                            <td class="text-center">{{$usuario->id}}</td>
+                            <td class="font-w600">
+                                <a href="javascript:void(0)">{{$usuario->nome}}</a>
+                            </td>
+                            <td class="d-none d-sm-table-cell font-size-sm">
+                                <em class="text-muted">{{$usuario->email}}</em>
+                            </td>
+                            <td class="text-center">
+                                <?php
+                                if ($usuario->nivel == '0') {
+                                    echo '<span class="badge badge-warning">Visitante</span>';
+                                } else if ($usuario->nivel == '1') {
+                                    echo '<span class="badge badge-danger">Adminstrador</span>';
+                                } else if ($usuario->nivel == '2') {
+                                    echo '<span class="badge badge-success">Usuário</span>';
+                                }
+                                ?>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a class="table-action" data-toggle="tooltip" data-original-title="Editar Usuário" href="{{route('usuario.edit_usuario',$usuario)}}">
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
 
 
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+                                    <form method="post" action="{{route('usuario.delete', $usuario->id)}}" onclick="return confirm('Deseja mesmo deletar o usuário {{$usuario->id}}?');">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit"  style="border:none; background-color: transparent;">
+                                            <i class="fas fa-trash" style="color:red" data-toggle="tooltip" data-original-title="excluir usuario" ></i>
+                                        </button>
+                                    </form>
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="modaldelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Deseja excluir o Usuário ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form id="delete-form-{{$usuario->id}}" + action="{{route('usuario.delete', $usuario->id)}}" method="post">
-                    @csrf 
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 
 
 
-<?php
-if (@$id != "") {
-    echo "<script>$('#modaldelete').modal('show');</script>";
-}
-?>
 
-@endsection
+    @endsection
+
+</body>

@@ -87,6 +87,8 @@ if (!isset($id)) {
                                 <a class="table-action" href="{{route('instituicao.modal', $instit)}}" data-toggle="modal" data-target="#basicExampleModal" method="post">
                                     <i data-toggle="tooltip" data-original-title="excluir Instituição" class="fas fa-trash"></i>
                                 </a>
+
+                                
                             </div>
                         </td>
                     </tr>
