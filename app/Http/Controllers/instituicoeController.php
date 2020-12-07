@@ -91,23 +91,14 @@ class instituicoeController extends controller
             return view('instituicao/index_instituicao',$instituicao)->with('instituicoes', $instituicao);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        DB::delete('DELETE FROM instituicoes WHERE id = ?', [$request->id]);
-
-        echo $request->id;
-
+        instituicoe::find($id)->delete();
         @session_start();
         $instituicao = instituicoe::first()->paginate();
         return view('instituicao/index_instituicao',$instituicao)->with('instituicoes', $instituicao);
     }
 
-     public function modal($id){
-        @session_start();
-        $instituicao = instituicoe::first()->paginate();
-        return view('instituicao/index_instituicao',$instituicao)->with('instituicoes', $instituicao);
-
-     }
     /**
      * Show the form for creating a new resource.
      *

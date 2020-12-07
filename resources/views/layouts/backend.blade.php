@@ -22,16 +22,19 @@ if (file_exists($filename)) {
 }
 ?>
 
+
+
+
 @section('js_after')
 
 <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+
+<!-- <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
-
+<script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script> -->
 
 <!-- responsavel por máscaras -->
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
@@ -48,6 +51,9 @@ if (file_exists($filename)) {
 @section('css_before')
 <link rel="stylesheet" id="css-main" href="css/oneui.min.css">
 <link rel="stylesheet" href="{{ URL::asset('js/plugins/datatables/dataTables.bootstrap4.css')}}">
+
+
+
 @endsection
 
 <!doctype html>
@@ -78,6 +84,9 @@ if (file_exists($filename)) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
     <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
 
+
+
+
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
     <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/flat.css') }}">
 
@@ -88,6 +97,7 @@ if (file_exists($filename)) {
     @yield('css_after')
     <!-- Scripts -->
     <!-- <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script> -->
+
 </head>
 
 <main id="main-container">
@@ -207,6 +217,11 @@ if (file_exists($filename)) {
                                 <li class="nav-main-item">
                                     <a class="nav-main-link{{ request()->is('instituicao.instituicao_lista') ? ' active' : '' }}" href="{{route('instituicao.index_instituicao_lista')}}">
                                         <span class="nav-main-link-name">Instituição</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('tomador.index_tomador') ? ' active' : '' }}" href="{{route('tomador.index_tomador',[$id_instituicao])}}">
+                                        <span class="nav-main-link-name">Tomadores</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">

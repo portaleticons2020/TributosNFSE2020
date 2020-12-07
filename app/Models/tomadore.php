@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tomador extends Model
+class tomadores extends Model
 {
     protected $table='tomadores';
     protected $filltable = ['documento',
