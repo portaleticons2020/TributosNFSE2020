@@ -219,6 +219,7 @@ if (file_exists($filename)) {
                                         <span class="nav-main-link-name">Instituição</span>
                                     </a>
                                 </li>
+
                                 <li class="nav-main-item">
                                     <a class="nav-main-link{{ request()->is('tomador.index_tomador') ? ' active' : '' }}" href="{{route('tomador.index_tomador',[$id_instituicao])}}">
                                         <span class="nav-main-link-name">Tomadores</span>

@@ -2,8 +2,8 @@
 @section('content')
 
 <?php
- session_start();
- $vCodInst = @$_SESSION['inst_id'];
+session_start();
+$vCodInst = @$_SESSION['inst_id'];
 ?>
 
 
@@ -79,13 +79,17 @@
                     </select>
                 </div>
             </div>
+
+
         </div>
-        <p align="right">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
-        </p>
+
+    </form>
+    <p align="right">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <input type="button" value="Cancelar" class="btn btn-danger" onclick="history.back();" />
+    </p>
 </div>
-</form>
+
 
 
 @endsection
